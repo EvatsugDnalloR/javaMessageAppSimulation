@@ -5,12 +5,12 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("Welcome to Java Messager");
 
-        ArrayList<Contacts> contacts = new ArrayList<>();
-        contacts.add(new Contacts("AUG", "114514"));
-        contacts.add(new Contacts("GUS", "1919819"));
-        contacts.add(new Contacts("EFE", "10101010"));
-        contacts.add(new Contacts("LI", "29292929"));
-        contacts.add(new Contacts("AYM", "38383838"));
+        ArrayList<String> contacts = new ArrayList<>();
+        contacts.add("AUG");
+        contacts.add("GUS");
+        contacts.add("EFE");
+        contacts.add("LI");
+        contacts.add("AYM");
 
         for (int i = 0; i<999999999; i++) {
             Scanner universalScanner = new Scanner(System.in);
@@ -22,48 +22,57 @@ public class Main {
 
             int input1 = universalScanner.nextInt();
             if (input1==1) {
-                for (Contacts c: contacts) {
-                    System.out.println("Names + Phone Numbers");
-                    System.out.println(c.getName() + c.getPhoneNumber());
-                }
-                System.out.println("CHOOSE YOUR ACTION");
-                System.out.println("1. Add New Contacts");
-                System.out.println("2. Delete Contacts");
-                System.out.println("3. Modify Contacts");
-                System.out.println("4. Go Back To Last Page");
+                for (int w = 0; w<999999999; w++) {
+                    System.out.println("Names: ");
+                    for (int p=0; p<contacts.size(); p++) {
+                        System.out.println(contacts.get(p));
+                    }
+                    System.out.println("CHOOSE YOUR ACTION");
+                    System.out.println("1. Add New Contacts");
+                    System.out.println("2. Delete Contacts");
+                    System.out.println("3. Modify Contacts");
+                    System.out.println("4. Go Back To Last Page");
 
-                int input11 = universalScanner.nextInt();
-                switch (input11) {
-                    case 1:
+                    int input11 = universalScanner.nextInt();
+                    if (input11==1) {
                         System.out.println("Please enter the Name...");
                         String newName = universalScanner.next();
 
-                        System.out.println("Please enter the Phone Number...");
-                        String newNumber = universalScanner.next();
-
-                        contacts.add(new Contacts(newName, newNumber));
-                        break;
-
-                    case 2:
+                        contacts.add(newName);
+                        System.out.println("New Contact added");
+                    } else if (input11==2) {
                         System.out.println("Please select which Contacts you want to delete...");
-                        for (Contacts c: contacts) {
-                            System.out.println(c.getName());
+                        for (int p=0; p<contacts.size(); p++) {
+                            System.out.println(contacts.get(p));
                         }
                         System.out.println("Enter your choice...");
                         String deleteName = universalScanner.next();
                         if (contacts.contains(deleteName)) {
+                            System.out.println(deleteName + " has been deleted...");
                             contacts.remove(deleteName);
-                        }else if (!contacts.contains(deleteName)){
-                            System.out.println("Doesn't exist this Contact");
+                        } else if (!contacts.contains(deleteName)) {
+                            System.out.println(deleteName + " doesn't exist...");
                         }
+                    } else if (input11==3) {
+                        for (int p=0; p<contacts.size(); p++) {
+                            System.out.println(contacts.get(p));
+                        }
+                        System.out.println("Enter your choice...");
+                        String originalName = universalScanner.next();
+                        if (contacts.contains(originalName)) {
+                            System.out.println("Enter your new name...");
+                            String modifiedName = universalScanner.next();
+                            contacts.set(contacts.indexOf(originalName), modifiedName);
+                        } else if (!contacts.contains(originalName)) {
+                            System.out.println(originalName + " doesn't exist...");
+                        }
+                    } else {
                         break;
-
-                    default:
-                        return;
-
-
+                    }
                 }
+
+
             }
-        }
     }
+}
 }
