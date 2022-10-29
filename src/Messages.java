@@ -2,9 +2,9 @@ public class Messages {
     private String text;
     private String receiver;
 
-    public Messages(String text, String reviever) {
+    public Messages(String text, String receiver) {
         this.text = text;
-        this.receiver = reviever;
+        this.receiver = receiver;
     }
 
     public String getText() {
