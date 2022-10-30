@@ -1,6 +1,4 @@
-import java.sql.SQLOutput;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -26,102 +24,131 @@ public class Main {
             int input1 = universalScanner.nextInt();
             if (input1==1) {
                 for (int w = 0; w<999999999; w++) {
-                    System.out.println("Names: ");
-                    for (Contacts c: contact) {
-                        c.getDetails();
+                    if (contact.size()>0) {
+                        System.out.println("You have " + contact.size() + " Contacts now");
+                    }else {
+                        System.out.println("You don't have any contact yet...");
                     }
+
                     System.out.println("CHOOSE YOUR ACTION");
                     System.out.println("1. Add New Contact");
                     System.out.println("2. Delete a Contact");
                     System.out.println("3. Modify a Contact");
                     System.out.println("4. Search a Contact");
-                    System.out.println("5. Go Back To The Menu");
+                    System.out.println("5. Show all the Contacts");
+                    System.out.println("6. Go Back To The Menu");
 
                     int input11 = universalScanner.nextInt();
                     if (input11==1) {
+                        boolean sameName = false;
+                        boolean sameNumber = false;
                         System.out.println("Please enter the Name...");
                         String newName = universalScanner.next();
-                        if (newName.equals("")) {
-                            System.out.println("Invalid name, please enter some shit");
+                        for (Contacts t: contact) {
+                            if (t.getName().equals(newName)) {
+                                System.out.println("This name already exists...");
+                                sameName = true;
+                            }
+                        }
+                        if (sameName) {
                             break;
                         }
                         System.out.println("Please enter the Phone Number");
                         String newPhoneNumber = universalScanner.next();
-                        if (newPhoneNumber.equals("")) {
-                            System.out.println("Invalid number, please enter some shit");
+                        for (Contacts t: contact) {
+                            if (t.getPhoneNumber().equals(newPhoneNumber)) {
+                                System.out.println("This phone number already exists...");
+                                sameNumber = true;
+                            }
+                        }
+                        if (sameNumber) {
                             break;
                         }
                         Contacts list = new Contacts(newName, newPhoneNumber);
                         contact.add(list);
                         System.out.println("New Contact added");
                     } else if (input11==2) {
-                        System.out.println("Please select which Contacts you want to delete...");
-                        for (Contacts c: contact) {
-                            c.getDetails();
-                        System.out.println("Enter your choice...");
-                        String deleteName = universalScanner.next();
-                        for (Contacts p: contact) {
-                            if (p.getName().equals(deleteName)) {
-                                contact.remove(p);
-                                System.out.println(deleteName + " has been deleted");
-                            } else if (!p.getName().equals(deleteName)) {
-                                System.out.println("This contact doesn't exist");
-                                break;
+                        if (contact.size()>0) {
+                            System.out.println("Please select which Contacts you want to delete...");
+                            for (Contacts c: contact) {
+                                c.getDetails();
                             }
-                        }
-                        }
-                    } else if (input11==3) {
-                        for (Contacts c: contact) {
-                            c.getDetails();
-                        }
-                        System.out.println("Which value do you want to modify?");
-                        System.out.println("1. Name");
-                        System.out.println("2. Phone Number");
-                        System.out.println("3. Cancel");
-                        int input113 = universalScanner.nextInt();
-                        if (input113==1) {
-                            System.out.println("Which contact do you want to modify?");
-                            String modifiedName = universalScanner.next();
-                            for (Contacts o: contact) {
-                                if (o.getName().equals(modifiedName)) {
-                                    System.out.println("Enter the new name...");
-                                    String newName = universalScanner.next();
-                                    o.setName(newName);
-                                } else if (!o.getName().equals(modifiedName)) {
+                            System.out.println("Enter your choice...");
+                            String deleteName = universalScanner.next();
+                            for (Contacts p: contact) {
+                                if (p.getName().equals(deleteName)) {
+                                    contact.remove(p);
+                                    System.out.println(deleteName + " has been deleted");
+                                } else {
                                     System.out.println("This contact doesn't exist");
                                     break;
                                 }
                             }
-                        } else if (input113==2) {
-                            System.out.println("Which contact do you want to modify?");
-                            String modifiedName = universalScanner.next();
-                            for (Contacts o: contact) {
-                                if (o.getName().equals(modifiedName)) {
-                                    System.out.println("Enter the new Number");
-                                    String newNumber = universalScanner.next();
-                                    o.setPhoneNumber(newNumber);
-                                }else if (!o.getName().equals(modifiedName)) {
-                                    System.out.println("This contact doesn't exist");
-                                    break;
+                        }
+                        } else if (input11==3) {
+                        if (contact.size()>0) {
+                            for (Contacts c: contact) {
+                                c.getDetails();
+                            }
+                            System.out.println("Which value do you want to modify?");
+                            System.out.println("1. Name");
+                            System.out.println("2. Phone Number");
+                            System.out.println("3. Cancel");
+                            int input113 = universalScanner.nextInt();
+                            if (input113==1) {
+                                System.out.println("Which contact do you want to modify?");
+                                String modifiedName = universalScanner.next();
+                                for (Contacts o: contact) {
+                                    if (o.getName().equals(modifiedName)) {
+                                        System.out.println("Enter the new name...");
+                                        String newName = universalScanner.next();
+                                        o.setName(newName);
+                                    } else {
+                                        System.out.println("This contact doesn't exist");
+                                        break;
+                                    }
                                 }
+                            } else if (input113==2) {
+                                System.out.println("Which contact do you want to modify?");
+                                String modifiedName = universalScanner.next();
+                                for (Contacts o: contact) {
+                                    if (o.getName().equals(modifiedName)) {
+                                        System.out.println("Enter the new Number");
+                                        String newNumber = universalScanner.next();
+                                        o.setPhoneNumber(newNumber);
+                                    }else {
+                                        System.out.println("This contact doesn't exist");
+                                        break;
+                                    }
 
-                            }
-                        }else {
-                            System.out.println("Canceled");
-                            break;
-                        }
-                    } else if (input11==4) {
-                        System.out.println("Enter the name you want to search...");
-                        String searchName = universalScanner.next();
-                        for (Contacts u: contact) {
-                            if (u.getName().equals(searchName)) {
-                                u.getDetails();
-                            } else if (!u.getName().equals(searchName))  {
-                                System.out.println("This contact doesn't exist");
+                                }
+                            }else {
+                                System.out.println("Canceled");
                                 break;
                             }
                         }
-                    } else {
+
+                    } else if (input11==4) {
+                        if (contact.size()>0) {
+                            System.out.println("Enter the name you want to search...");
+                            String searchName = universalScanner.next();
+                            for (Contacts u: contact) {
+                                if (u.getName().equals(searchName)) {
+                                    u.getDetails();
+                                } else {
+                                    System.out.println("This contact doesn't exist");
+                                    break;
+                                }
+                            }
+                        }
+
+                    } else if (input11==5) {
+                        if (contact.size()>0) {
+                            for (Contacts c: contact) {
+                                c.getDetails();
+                            }
+                    }
+                    }else {
                         break;
                     }
                 }
@@ -135,8 +162,14 @@ public class Main {
                     int input12 = universalScanner.nextInt();
                     if (input12==1) {
 
+                    } else if (input12==2) {
+
+                    }else {
+                        break;
                     }
                 }
+            }else {
+                return;
             }
         }
 }
