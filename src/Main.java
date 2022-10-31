@@ -4,6 +4,8 @@ import java.util.Scanner;
 public class Main {
 
     private static ArrayList<Contacts> contact;
+
+    private static ArrayList<Messages> message;
     private static Scanner universalScanner;
 
     public static void main(String[] args) {
@@ -11,6 +13,8 @@ public class Main {
         System.out.println("Welcome to Java Messager");
 
         contact = new ArrayList<>();
+
+        message = new ArrayList<>();
 
         universalScanner = new Scanner(System.in);
 
@@ -153,20 +157,48 @@ public class Main {
                     }
                 }
             } else if (input1==2) {
-                for (int t = 0; t<999999999; t++) {
-                    System.out.println("CHOOSE YOUR ACTION");
-                    System.out.println("1. Show the Messages");
-                    System.out.println("2. Send new Messages");
-                    System.out.println("3. Go Back To The Menu");
+                if (contact.size()>0) {
+                    for (int t = 0; t<999999999; t++) {
+                        System.out.println("CHOOSE YOUR ACTION");
+                        System.out.println("1. Send new Messages");
+                        System.out.println("2. Show the Messages");
+                        System.out.println("3. Go Back To The Menu");
 
-                    int input12 = universalScanner.nextInt();
-                    if (input12==1) {
-
-                    } else if (input12==2) {
-
-                    }else {
-                        break;
-                    }
+                        int input12 = universalScanner.nextInt();
+                        if (input12==1) {
+                            System.out.println("Which contact do you want to choose");
+                            String chooseContact = universalScanner.next();
+                            for (Contacts c: contact) {
+                                if (c.getName().equals(chooseContact)) {
+                                    System.out.println("Send what you want...");
+                                    String mesage = universalScanner.next();
+                                    Messages list = new Messages(mesage, chooseContact);
+                                    message.add(list);
+                                    System.out.println("Message sent");
+                                }else {
+                                    System.out.println("This contact doesn't exist...");
+                                }
+                            }
+                        } else if (input12==2) {
+                            if (message.size()>0) {
+                                System.out.println("Which Contact do you want to choose?");
+                                String contactMessage = universalScanner.next();
+                                for (Messages m: message) {
+                                    if (m.getReceiver().equals(contactMessage)) {
+                                        m.getDetails();
+                                    }else {
+                                        System.out.println("This contact doesn't exist...");
+                                    }
+                                }
+                            }else {
+                                System.out.println("You don't have any message yet...");
+                            }
+                        }else {
+                            break;
+                        }
+                }
+                }else {
+                    System.out.println("You don't have any contact yet...");
                 }
             }else {
                 return;

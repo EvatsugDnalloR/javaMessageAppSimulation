@@ -7,6 +7,12 @@ public class Messages {
         this.receiver = receiver;
     }
 
+    public void getDetails () {
+        System.out.println("To: " + this.receiver);
+        System.out.println(this.text);
+        System.out.println("********************");
+    }
+
     public String getText() {
         return text;
     }
