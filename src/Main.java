@@ -4,8 +4,6 @@ import java.util.Scanner;
 public class Main {
 
     private static ArrayList<Contacts> contact;
-
-    private static ArrayList<Messages> message;
     private static Scanner universalScanner;
 
     public static void main(String[] args) {
@@ -13,8 +11,6 @@ public class Main {
         System.out.println("Welcome to Java Messager");
 
         contact = new ArrayList<>();
-
-        message = new ArrayList<>();
 
         universalScanner = new Scanner(System.in);
 
@@ -166,32 +162,46 @@ public class Main {
 
                         int input12 = universalScanner.nextInt();
                         if (input12==1) {
+                            for (Contacts c: contact) {
+                                c.getDetails();
+                            }
                             System.out.println("Which contact do you want to choose");
                             String chooseContact = universalScanner.next();
+                            System.out.println("Send what you want...");
+                            String mesage = universalScanner.next();
+                            Messages list = new Messages(mesage);
                             for (Contacts c: contact) {
                                 if (c.getName().equals(chooseContact)) {
-                                    System.out.println("Send what you want...");
-                                    String mesage = universalScanner.next();
-                                    Messages list = new Messages(mesage, chooseContact);
-                                    message.add(list);
+                                    ArrayList<Messages> messageList = c.getMessage();
+                                    messageList.add(list);
+                                    c.setMessage(messageList);
                                     System.out.println("Message sent");
                                 }else {
                                     System.out.println("This contact doesn't exist...");
                                 }
                             }
                         } else if (input12==2) {
-                            if (message.size()>0) {
-                                System.out.println("Which Contact do you want to choose?");
-                                String contactMessage = universalScanner.next();
-                                for (Messages m: message) {
-                                    if (m.getReceiver().equals(contactMessage)) {
-                                        m.getDetails();
-                                    }else {
-                                        System.out.println("This contact doesn't exist...");
+                            ArrayList<Messages> allMessgaes = new ArrayList<>();
+                            for (Contacts c: contact) {
+                                c.getDetails();
+                            }
+                            System.out.println("Which Contact do you want to choose?");
+                            String contactMessage = universalScanner.next();
+                            for (Contacts c: contact) {
+                                if (c.getName().equals(contactMessage)) {
+                                    allMessgaes.addAll(c.getMessage());
+                                    if (allMessgaes.size()>0) {
+                                        for (Messages m: allMessgaes) {
+                                            m.getDetails();
+                                        }
+                                    } else {
+                                        System.out.println("You haven't sent any message to him...");
                                     }
+
+
+                                }else {
+                                    System.out.println("This contact doesn't exist...");
                                 }
-                            }else {
-                                System.out.println("You don't have any message yet...");
                             }
                         }else {
                             break;

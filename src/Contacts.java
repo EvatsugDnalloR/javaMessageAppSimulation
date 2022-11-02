@@ -17,9 +17,18 @@ public class Contacts {
                 "\n********************");
     }
 
+    public ArrayList<Messages> getMessage() {
+        return message;
+    }
+
+    public void setMessage(ArrayList<Messages> message) {
+        this.message = message;
+    }
+
     public Contacts(String name, String phoneNumber) {
         this.name = name;
         this.phoneNumber = phoneNumber;
+        this.message = new ArrayList<>();
     }
 
     public String getName() {
@@ -38,11 +47,4 @@ public class Contacts {
         this.phoneNumber = phoneNumber;
     }
 
-    public ArrayList<Messages> getMessage() {
-        return message;
-    }
-
-    public void setMessage(ArrayList<Messages> message) {
-        this.message = message;
-    }
 }
