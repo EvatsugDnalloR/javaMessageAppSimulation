@@ -5,12 +5,6 @@ public class Contacts {
     private String phoneNumber;
     private ArrayList<Messages> message;
 
-    public Contacts(String name, String phoneNumber, ArrayList<Messages> message) {
-        this.name = name;
-        this.phoneNumber = phoneNumber;
-        this.message = message;
-    }
-
     public void getDetails () {
         System.out.println("Name: " + this.name +
                 "\nPhone Number: " + this.phoneNumber +

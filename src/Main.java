@@ -1,19 +1,15 @@
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Scanner;
 
 public class Main {
-
-    private static ArrayList<Contacts> contact;
-    private static Scanner universalScanner;
 
     public static void main(String[] args) {
 
         System.out.println("Welcome to Java Messager");
 
-        contact = new ArrayList<>();
+        ArrayList<Contacts> contact = new ArrayList<>();
 
-        universalScanner = new Scanner(System.in);
+        Scanner universalScanner = new Scanner(System.in);
 
         for (int i = 0; i<999999999; i++) {
 
@@ -81,11 +77,10 @@ public class Main {
                                 if (p.getName().equals(deleteName)) {
                                     b = p;
                                     System.out.println(deleteName + " has been deleted");
-                                    break;
                                 } else {
                                     System.out.println("This contact doesn't exist");
-                                    break;
                                 }
+                                break;
                             }
                             contact.remove(b);
                         }

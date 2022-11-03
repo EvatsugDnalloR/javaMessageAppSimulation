@@ -1,5 +1,5 @@
 public class Messages {
-    private String text;
+    private final String text;
 
     public Messages(String text) {
         this.text = text;
