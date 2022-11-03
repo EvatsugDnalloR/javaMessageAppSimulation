@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class Main {
@@ -75,15 +76,18 @@ public class Main {
                             }
                             System.out.println("Enter your choice...");
                             String deleteName = universalScanner.next();
+                            Contacts b = null;
                             for (Contacts p: contact) {
                                 if (p.getName().equals(deleteName)) {
-                                    contact.remove(p);
+                                    b = p;
                                     System.out.println(deleteName + " has been deleted");
+                                    break;
                                 } else {
                                     System.out.println("This contact doesn't exist");
                                     break;
                                 }
                             }
+                            contact.remove(b);
                         }
                         } else if (input11==3) {
                         if (contact.size()>0) {
